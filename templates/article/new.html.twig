@@ -1,0 +1,10 @@
+{# article/_form.html.twig #}
+
+{{ form_start(form) }}
+    {{ form_row(form.titre_article) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.description_article) }}
+    {{ form_row(form.prix) }}
+
+    <button type="submit">Save</button>
+{{ form_end(form) }}

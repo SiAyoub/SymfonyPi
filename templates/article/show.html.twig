@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre_article</th>
+                <td>{{ article.titre_article }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {% if article.image %}
+                        <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="Article Image">
+                    {% else %}
+                        No Image Available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Description_article</th>
+                <td>{{ article.description_article }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ article.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_index') }}">back to list</a>
+
+    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <h1>Article index</h1>
+
+    <table class="table" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="border: 1px solid #ddd; background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Id</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Titre_article</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Image</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Description_article</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Prix</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr style="border: 1px solid #ddd;">
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ article.id }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ article.titreArticle }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                    {% if article.image %}
+                        <img src="{{ asset('images/articles/' ~ article.image) }}" alt="{{ article.titreArticle }}" style="max-width: 100px;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ article.descriptionArticle }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ article.prix }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr style="border: 1px solid #ddd;">
+                <td colspan="6" style="border: 1px solid #ddd; padding: 8px; text-align: left;">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_new') }}">Create new</a>
+{% endblock %}
